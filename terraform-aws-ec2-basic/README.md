@@ -3,7 +3,7 @@
 ![architecture](https://github.com/rivera-bl/[reponame]/blob/master/architecture.jpg?raw=true)
 ## Description
 
-A basic EC2 instance with sane defaults for when you need to test something asap. For example, if no subnet_id and vpc_id is specified, it will launch the instance in the first subnet of the default VPC.
+A basic EC2 instance with sane defaults for when you need to test something asap, not meant to be used in production. Sane defaults because if no subnet_id and vpc_id is specified, it will launch the instance in the subnets of the default VPC.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ A basic EC2 instance with sane defaults for when you need to test something asap
 
 ## Known Issues
 
-Any advise for common problems or issues.
+If specifying more than 3 instances there may be a problem because it is launching the instances in the subnets using the count.index, and there isn't more than 3 subnets in the default VPC
 
 ## License
 
