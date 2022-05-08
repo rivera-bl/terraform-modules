@@ -1,5 +1,4 @@
 # TODO: check if its possible to use dynamic blocks for defining sg rules outside of module
-# TODO: parametrize network
 
 locals {
   ami_name = var.ami_name
@@ -11,7 +10,7 @@ resource "aws_instance" "this" {
   instance_type               = var.instance_type
   ami                         = data.aws_ami.this.id
   key_name                    = aws_key_pair.this.key_name
-  subnet_id                   = [for s in data.aws_subnet.this : s.id][0]
+  subnet_id                   = var.subnet_id != null ? var.subnet_id : [for s in data.aws_subnet.this : s.id][0]
   vpc_security_group_ids      = [aws_security_group.public.id]
   user_data                   = var.user_data
 
@@ -27,7 +26,7 @@ resource "aws_key_pair" "this" {
 
 resource "aws_security_group" "public" {
   name   = "${var.service_name}-sg"
-  vpc_id = data.aws_vpc.this.id
+  vpc_id = var.vpc_id != null ? var.subnet_id : data.aws_vpc.this.id
 
   ingress {
     from_port   = 22

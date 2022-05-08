@@ -1,10 +1,9 @@
 # Project Title
 
 ![architecture](https://github.com/rivera-bl/[reponame]/blob/master/architecture.jpg?raw=true)
-
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+A basic EC2 instance with sane defaults for when you need to test something asap. For example, if no subnet_id and vpc_id is specified, it will launch the instance in the first subnet of the default VPC.
 
 ## Getting Started
 

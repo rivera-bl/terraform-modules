@@ -32,3 +32,17 @@ variable "count_instances" {
   type        = number
   description = "Number of instances to deploy"
 }
+
+variable "subnet_id" {
+  default     = null
+  type        = string
+  description = "ID of the subnet to launch the EC2 instance"
+}
+
+variable "vpc_id" {
+  default     = null
+  type        = string
+  description = "ID of the vpc of the security group"
+}
+
+
