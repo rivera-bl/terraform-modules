@@ -27,7 +27,7 @@ resource "aws_key_pair" "this" {
 
 resource "aws_security_group" "public" {
   name   = "${var.service_name}-sg"
-  vpc_id = var.vpc_id != null ? var.subnet_id : data.aws_vpc.this.id
+  vpc_id = var.vpc_id != null ? var.vpc_id : data.aws_vpc.this.id
 
   ingress {
     from_port   = 22
