@@ -5,6 +5,8 @@
 
 A basic EC2 instance with sane defaults for when you need to test something asap, not meant to be used in production. Sane defaults because if no subnet_id and vpc_id is specified, it will launch the instance in the subnets of the default VPC.
 
+8080 port is open for testing of web services
+
 ## Getting Started
 
 ### Requirements
