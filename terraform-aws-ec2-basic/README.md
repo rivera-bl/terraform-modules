@@ -13,8 +13,8 @@ TODO: add security group rules dinamically on the module call
 2. markdown
 3. rendering on github
 
-this is a line
-and this is another line that should go behind the previous line
+this is a line 
+and this is other line
 
 ## Getting Started
 
