@@ -7,6 +7,12 @@ A basic EC2 instance with sane defaults for when you need to test something asap
 
 8080 port is open for testing of web services
 
+TODO: add security group rules dinamically on the module call
+
+1. testing
+2. markdown
+3. rendering on github
+
 ## Getting Started
 
 ### Requirements
