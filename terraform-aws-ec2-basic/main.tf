@@ -9,7 +9,7 @@ resource "aws_instance" "this" {
   count                       = var.count_instances
   associate_public_ip_address = true
   instance_type               = var.instance_type
-  ami                         = data.aws_ami.this.id
+  ami                         = var.ami_id != null ? var.ami_id : data.aws_ami.this.id
   key_name                    = aws_key_pair.this.key_name
   subnet_id                   = var.subnet_id != null ? var.subnet_id : [for s in data.aws_subnet.this : s.id][count.index]
   vpc_security_group_ids      = [aws_security_group.public.id]

@@ -45,4 +45,10 @@ variable "vpc_id" {
   description = "ID of the vpc of the security group"
 }
 
+variable "ami_id" {
+  default     = null
+  type        = string
+  description = "AMI Id"
+}
+
 
