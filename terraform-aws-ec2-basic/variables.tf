@@ -16,7 +16,7 @@ variable "ami_name" {
 }
 
 variable "public_key_file" {
-  default     = "~/.ssh/ec2-common.pub"
+  default     = null
   type        = string
   description = "Path to the public key for the EC2 instance"
 }

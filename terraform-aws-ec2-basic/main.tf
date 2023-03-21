@@ -9,7 +9,7 @@ resource "aws_instance" "this" {
   count                       = var.count_instances
   associate_public_ip_address = true
   instance_type               = var.instance_type
-  ami                         = var.ami_id != null ? var.ami_id : data.aws_ami.this.id
+  ami                         = var.ami_id != data.aws_ami.this.id
   key_name                    = aws_key_pair.this.key_name
   subnet_id                   = var.subnet_id != null ? var.subnet_id : [for s in data.aws_subnet.this : s.id][count.index]
   vpc_security_group_ids      = [aws_security_group.public.id]
@@ -21,6 +21,7 @@ resource "aws_instance" "this" {
 }
 
 resource "aws_key_pair" "this" {
+  count      = var.public_key_file != null ? 1 : 0
   key_name   = "${var.service_name}-key"
   public_key = file(var.public_key_file)
 }
