@@ -9,10 +9,10 @@ resource "aws_instance" "this" {
   count                       = var.count_instances
   associate_public_ip_address = true
   instance_type               = var.instance_type
-  ami                         = var.ami_id != data.aws_ami.this.id
-  key_name                    = var.public_key_file != null ? aws_key_pair.this.key_name : null
+  ami                         = var.ami_id != null ? var.ami_id : data.aws_ami.this.id
+  key_name                    = var.public_key_file != null ? aws_key_pair.this[0].key_name : null
   subnet_id                   = var.subnet_id != null ? var.subnet_id : [for s in data.aws_subnet.this : s.id][count.index]
-  vpc_security_group_ids      = [aws_security_group.public.id]
+  # vpc_security_group_ids      = [aws_security_group.public.id]
   user_data                   = var.user_data
 
   tags = {
@@ -26,50 +26,50 @@ resource "aws_key_pair" "this" {
   public_key = file(var.public_key_file)
 }
 
-resource "aws_security_group" "public" {
-  name   = "${var.service_name}-sg"
-  vpc_id = var.vpc_id != null ? var.vpc_id : data.aws_vpc.this.id
+# resource "aws_security_group" "public" {
+#   name   = "${var.service_name}-sg"
+#   vpc_id = var.vpc_id != null ? var.vpc_id : data.aws_vpc.this.id
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   ingress {
+#     from_port   = 22
+#     to_port     = 22
+#     protocol    = "tcp"
+#     cidr_blocks = var.sg_cidr_blocks_ingress
+#   }
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   ingress {
+#     from_port   = 80
+#     to_port     = 80
+#     protocol    = "tcp"
+#     cidr_blocks = var.sg_cidr_blocks_ingress
+#   }
 
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   ingress {
+#     from_port   = 443
+#     to_port     = 443
+#     protocol    = "tcp"
+#     cidr_blocks = var.sg_cidr_blocks_ingress
+#   }
 
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   ingress {
+#     from_port   = 8080
+#     to_port     = 8080
+#     protocol    = "tcp"
+#     cidr_blocks = var.sg_cidr_blocks_ingress
+#   }
 
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "ICMP"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   ingress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "ICMP"
+#     cidr_blocks = var.sg_cidr_blocks_ingress
+#   }
 
-  egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
-    prefix_list_ids = []
-  }
-}
+#   egress {
+#     from_port       = 0
+#     to_port         = 0
+#     protocol        = "-1"
+#     cidr_blocks     = var.sg_cidr_blocks_egress
+#     prefix_list_ids = []
+#   }
+# }

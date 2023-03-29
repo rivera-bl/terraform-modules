@@ -51,4 +51,14 @@ variable "ami_id" {
   description = "AMI Id"
 }
 
+variable "sg_cidr_blocks_ingress" {
+  default     = ["0.0.0.0/0"]
+  type        = list(string)
+  description = ""
+}
 
+variable "sg_cidr_blocks_egress" {
+  default     = ["0.0.0.0/0"]
+  type        = list(string)
+  description = ""
+}
